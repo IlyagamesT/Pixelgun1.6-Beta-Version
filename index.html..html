@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PIXELGUN 1.6 - LEGACY MAP</title>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; background: #222; font-family: "Courier New", Courier, monospace; touch-action: none; }
+        canvas { display: block; }
+        
+        /* Главное меню */
+        #menu { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center; z-index: 100; }
+        .cs-panel { background: rgba(45, 50, 35, 0.95); border: 2px solid #6c7254; width: 85%; max-width: 420px; padding: 25px; color: #d4d8b8; box-shadow: 10px 10px 0px rgba(0,0,0,0.5); }
+        
+        h1 { color: #f1c40f; text-align: center; font-size: 32px; margin: 0 0 20px 0; text-shadow: 2px 2px #000; }
+        h2 { color: #f1c40f; font-size: 20px; border-bottom: 1px solid #6c7254; padding-bottom: 5px; margin-bottom: 15px; }
+        
+        .menu-btn { display: block; width: 100%; padding: 14px; margin: 10px 0; background: rgba(0,0,0,0.5); border: 1px solid #6c7254; color: #d4d8b8; text-align: left; font-size: 18px; cursor: pointer; text-transform: uppercase; }
+        .menu-btn:active { background: #f1c40f; color: #000; }
+
+        /* Кнопка магазина во время игры */
+        #shop-trigger { 
+            position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);
+            background: #f1c40f; color: #000; border: 3px solid #000; 
+            font-weight: bold; padding: 15px 30px; cursor: pointer; z-index: 50; display: none;
+            box-shadow: 4px 4px 0px #000; font-family: inherit;
+        }
+
+        .shop-item { display: flex; justify-content: space-between; padding: 12px; margin: 5px 0; background: rgba(0,0,0,0.3); border: 1px solid #5c6244; cursor: pointer; }
+        .shop-item:hover { background: rgba(241, 196, 15, 0.2); }
+    </style>
+</head>
+<body>
+    <canvas id="game"></canvas>
+    
+    <button id="shop-trigger" onclick="toggleShop(true)">SHOP</button>
+
+    <div id="menu">
+        <div id="main-ui" class="cs-panel">
+            <h1>PIXELGUN 1.6</h1>
+            <button class="menu-btn" onclick="showUI('game-menu-ui')">1. Game Menu</button>
+            <button class="menu-btn" onclick="showUI('settings-ui')">2. Settings</button>
+        </div>
+
+        <div id="game-menu-ui" class="cs-panel" style="display: none;">
+            <h2>GAME MENU</h2>
+            <button class="menu-btn" id="startClassicBtn">1. Classic Game (Legacy)</button>
+            <button class="menu-btn" onclick="showUI('main-ui')">0. Back</button>
+        </div>
+
+        <div id="shop-ui" class="cs-panel" style="display: none;">
+            <h2>EQUIPMENT</h2>
+            <div class="shop-item" onclick="selectWeapon('ak47')"><span>1. AK-47</span><span>$0</span></div>
+            <div class="shop-item" onclick="selectWeapon('awp')"><span>2. AWP</span><span>$0</span></div>
+            <div class="shop-item" onclick="selectWeapon('shotgun')"><span>3. Shotgun</span><span>$0</span></div>
+            <button class="menu-btn" onclick="toggleShop(false)" style="text-align:center; background:#2d3223; margin-top:20px;">CLOSE</button>
+        </div>
+
+        <div id="settings-ui" class="cs-panel" style="display: none;">
+            <h2>SETTINGS</h2>
+            <div style="margin: 20px 0;">
+                <label>VOLUME:</label>
+                <input type="range" style="width:100%; accent-color:#f1c40f;">
+            </div>
+            <button class="menu-btn" onclick="showUI('main-ui')">0. Back</button>
+        </div>
+    </div>
+
+    <script src="aibotss.js"></script>
+    <script src="logicc.js"></script>
+</body>
+</html>
